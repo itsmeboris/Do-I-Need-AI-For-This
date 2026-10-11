@@ -18,7 +18,7 @@ design decision is made.
 
 **Captures:** what causes this work to start.
 **Resolved when:** the user has named one of: a human request, an external event, a clock, or a condition someone is currently watching for by hand.
-**If unknown:** assume a schedule, and flag that an event source was not investigated.
+**If unknown:** apply the question policy below; after authorized assumptions, use a schedule and flag that an event source was not investigated.
 
 The trigger determines more of the final architecture than any other slot. A
 condition that "someone keeps an eye on" is almost never a genuine polling
@@ -29,7 +29,7 @@ Push for the event before accepting the poll.
 
 **Captures:** how often the trigger fires and how many items arrive each time.
 **Resolved when:** the user has named an approximate frequency and a rough upper bound on batch size, even if both are estimates.
-**If unknown:** assume low frequency (daily or less) and small batches (under 100 items), and flag that neither was confirmed.
+**If unknown:** apply the question policy below; after authorized assumptions, use low frequency (daily or less) and small batches (under 100 items), and flag that neither was confirmed.
 
 Volume decides whether a judgment-heavy approach is affordable. An agent that
 carefully evaluates each item may be entirely appropriate at ten items per day
@@ -41,7 +41,7 @@ design that is correct at one volume is often wrong at another.
 
 **Captures:** what data or artifacts the automation receives when it starts.
 **Resolved when:** the user has named every input and the system or format that produces it.
-**If unknown:** assume whatever the trigger event naturally carries, and flag that the input contract was not confirmed.
+**If unknown:** apply the question policy below; after authorized assumptions, use whatever the trigger event naturally carries and flag that the input contract was not confirmed.
 
 Inputs define the information boundary. An agent that must make a judgment call
 with an incomplete input is a worse outcome than discovering the missing field
@@ -53,7 +53,7 @@ separate lookup — a lookup that may itself be deterministic.
 
 **Captures:** the choice or assessment the automation must make, and whether a deterministic rule can express it.
 **Resolved when:** the user has either stated a rule that produces the right output for all inputs, or confirmed that no such rule can be written.
-**If unknown:** treat it as a potential judgment call, but probe for the rule before accepting that conclusion.
+**If unknown:** apply the question policy below; probe for the rule before treating it as a potential judgment call.
 
 This is the load-bearing slot. Most automation ideas that reach for AI are
 deterministic rules that the author has not yet articulated. A rule that can be
@@ -66,7 +66,7 @@ deciding.
 
 **Captures:** what the automation does with its output, and how much damage an incorrect action causes.
 **Resolved when:** the user has named the target system, the mutation that will occur, and whether that mutation is reversible.
-**If unknown:** assume the action is irreversible and the blast radius is production-affecting, and flag both assumptions.
+**If unknown:** apply the question policy below; after authorized assumptions, treat the action as irreversible and production-affecting, and flag both assumptions.
 
 Blast radius is the single most important constraint on whether an autonomous
 architecture is acceptable. A writable action in an irreversible system requires
@@ -78,7 +78,7 @@ user skip past this slot.
 
 **Captures:** how the system or a human knows the automation did the right thing.
 **Resolved when:** the user has named a concrete, observable outcome that distinguishes a correct run from an incorrect one.
-**If unknown:** assume there is no automated success signal and that a human must verify, and flag that assumption.
+**If unknown:** apply the question policy below; after authorized assumptions, use human verification and flag the absence of an automated success signal.
 
 Without a success signal there is no feedback loop and no way to discover
 degradation over time. An automation that "just runs" is one that can silently
@@ -90,7 +90,7 @@ accepting that human audit is the only option.
 
 **Captures:** the acceptable error rate and the mechanism for human intervention when the automation makes a mistake.
 **Resolved when:** the user has named a threshold for errors before escalation and described how a human can inspect or override a decision.
-**If unknown:** assume zero tolerance and mandatory human review, and flag that the actual threshold was not confirmed.
+**If unknown:** apply the question policy below; after authorized assumptions, use zero tolerance and mandatory human review, and flag that the threshold was not confirmed.
 
 A stated tolerance is what distinguishes a production system from a prototype.
 "It has to be correct" is a requirement statement, not a tolerance — it says
@@ -103,7 +103,7 @@ automation; a low one implies the blast radius was underestimated.
 
 **Captures:** limits on latency, cost, privacy, compliance, or existing system boundaries that rule out otherwise-valid architectures.
 **Resolved when:** the user has named any hard limits on time, money, data handling, or available systems.
-**If unknown:** assume no hard constraints other than those implied by the target environment, and flag that constraints were not probed.
+**If unknown:** apply the question policy below; after authorized assumptions, use only constraints implied by the target environment and flag that constraints were not confirmed.
 
 Constraints are easiest to miss and most expensive to discover late. A model
 invocation that would otherwise be the clean architectural answer may be
@@ -115,5 +115,5 @@ decomposition, not just one component.
 ## Rules
 
 1. Never ask what the user already said. Parse the initial description into slots before asking anything.
-2. Never block on a missing slot. Mark it assumed, state the assumption in the verdict, continue.
+2. Do not block indefinitely on a missing slot. First classify it using Step 3 in `SKILL.md`. Ask another round for decision-changing unknowns. If they remain unanswered, ask whether to continue with marked assumptions; low-impact unknowns may be assumed directly.
 3. Ask at most three questions per message.

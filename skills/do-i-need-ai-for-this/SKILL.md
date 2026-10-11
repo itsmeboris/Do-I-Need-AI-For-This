@@ -62,10 +62,23 @@ sentence. These four decide which pattern wins, so prefer asking over assuming:
 - **Tolerance and review** -- how much the design must defend against being wrong
 - **Success signal** -- without one, no failure mode is detectable
 
-Assume only where the answer cannot change the recommendation, and flag every
-assumed slot with `[assumed: <basis>]` so a reader can see exactly what to push
-back on. A verdict resting on four silent assumptions is worth less than one that
-took two more questions to produce.
+Classify every unresolved slot before proceeding:
+
+- **Decision-changing** -- its answer could change pattern selection, model
+  placement, the build-vs-don't-build decision, a safety gate, or feasibility.
+- **Low-impact** -- its answer changes implementation detail but cannot change the
+  verdict.
+
+After every answer round, re-evaluate the frame. If decision-changing unknowns
+remain, ask one additional question round, again capped at three questions. If
+they remain unanswered because the user does not know, or the user asks to move
+on, ask whether to continue with marked assumptions. Do not begin the verdict
+until the user chooses. Low-impact unknowns do not need another round: assume a
+reasonable value and flag it with `[assumed: <basis>]`.
+
+Every assumption must be visible so a reader can see exactly what to push back
+on. A verdict resting on four silent assumptions is worth less than one that took
+two more questions to produce.
 
 For the `audit` entry point: read the target implementation instead of asking the
 user, then confirm the inferred frame in one message.
