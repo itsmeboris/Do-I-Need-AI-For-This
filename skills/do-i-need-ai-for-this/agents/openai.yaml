@@ -1,0 +1,4 @@
+interface:
+  display_name: "Do I Need AI for This?"
+  short_description: "Create checked HTML verdicts"
+  default_prompt: "Find the smallest safe architecture for this automation and return the validated HTML report."

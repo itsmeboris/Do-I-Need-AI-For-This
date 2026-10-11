@@ -1,0 +1,36 @@
+{
+  "name": "do-i-need-ai-for-this",
+  "version": "1.0.0",
+  "description": "Reviews an automation idea or implementation and puts model judgment inside the smallest safe, testable architecture.",
+  "author": {
+    "name": "Boris Sobol",
+    "url": "https://github.com/itsmeboris"
+  },
+  "homepage": "https://github.com/itsmeboris/Do-I-Need-AI-For-This",
+  "repository": "https://github.com/itsmeboris/Do-I-Need-AI-For-This",
+  "license": "Apache-2.0",
+  "keywords": [
+    "architecture",
+    "automation",
+    "agents",
+    "design-review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Do I Need AI for This?",
+    "shortDescription": "Bound AI with checked verdicts",
+    "longDescription": "Produce or audit a machine-checked architecture verdict that separates deterministic work, model judgment, and human authority; selects the smallest safe pattern; exposes evidence and assumptions; and prevents incomplete verifiers from authorizing consequential actions.",
+    "developerName": "Boris Sobol",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Find the smallest safe architecture for this automation.",
+      "Audit this agent for wasted model calls and missing human gates.",
+      "Show exactly what the verifier proves before this output can act."
+    ]
+  }
+}
