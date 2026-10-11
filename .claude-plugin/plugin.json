@@ -2,7 +2,7 @@
   "name": "do-i-need-ai-for-this",
   "displayName": "Do I Need AI for This?",
   "description": "Reviews automation designs and keeps model judgment inside the smallest safe, testable architecture",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Boris Sobol",
     "url": "https://github.com/itsmeboris"
