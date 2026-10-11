@@ -456,7 +456,7 @@ table { width:100%; border-collapse:collapse; min-width:620px; font-size:.92rem;
 th,td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
 th { color:#554c43; background:#f3ece1; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; }
 tbody tr:last-child td { border-bottom:0; }
-@media (max-width: 640px) { .page { width:100%; margin:0; border:0; } .hero { padding:28px 20px; } .content { padding:24px 20px; } .brief-card { grid-template-columns:1fr; gap:4px; } .metric { min-height:96px; padding:18px 20px; } }
+@media (max-width: 640px) { .page { width:100%; margin:0; border:0; } .hero { padding:28px 20px; } .content { padding:24px 20px; } .brief-card { grid-template-columns:minmax(0,1fr); gap:4px; } .metric { min-height:96px; padding:18px 20px; } }
 @media print { html { background:#fff; } .page { width:100%; margin:0; border:0; box-shadow:none; } .hero { padding:24px 0; background:#fff; } .content { padding:20px 0; } .brief-card { break-inside:avoid; } .table-wrap { overflow:visible; } table { min-width:0; } }
 """.strip()
 
