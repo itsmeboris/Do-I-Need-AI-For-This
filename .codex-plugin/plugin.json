@@ -1,6 +1,6 @@
 {
   "name": "do-i-need-ai-for-this",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Reviews an automation idea or implementation and puts model judgment inside the smallest safe, testable architecture.",
   "author": {
     "name": "Boris Sobol",

@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.10", "3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Check example
+        run: python skills/do-i-need-ai-for-this/check_verdict.py examples/support-triage.md
+      - name: Render example
+        run: python skills/do-i-need-ai-for-this/render_verdict.py examples/support-triage.md report.html

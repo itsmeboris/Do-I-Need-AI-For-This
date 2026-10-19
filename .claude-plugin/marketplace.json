@@ -1,0 +1,17 @@
+{
+  "name": "dinaift",
+  "owner": {
+    "name": "Boris Sobol"
+  },
+  "plugins": [
+    {
+      "name": "do-i-need-ai-for-this",
+      "source": "./",
+      "description": "Find the smallest safe architecture for your automation.",
+      "version": "1.0.3"
+    }
+  ],
+  "metadata": {
+    "description": "Architecture review skills for choosing where automation needs AI."
+  }
+}

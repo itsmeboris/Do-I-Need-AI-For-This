@@ -274,6 +274,12 @@ def check_structure(text: str, path: str) -> list[Violation]:
             violations.append(
                 Violation("structure", path, f"sections are out of order: {ordered}")
             )
+    sections = _sections(text, level=2)
+    violations.extend(
+        Violation("structure", path, f"empty section: {section}")
+        for section in VERDICT_SECTIONS
+        if section in sections and not sections[section].strip()
+    )
     return violations
 
 

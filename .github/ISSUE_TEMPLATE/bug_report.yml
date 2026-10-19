@@ -1,0 +1,25 @@
+name: Bug report
+description: Report an installation, validation, or report problem.
+title: "[Bug]: "
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Host agent and version, OS, Python version, installation method, plugin version.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps and minimal input
+      description: Use fictional or sanitized data. Never include credentials or private reports.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual behavior
+      description: Include the error message or a cropped, sanitized screenshot if useful.
+    validations:
+      required: true

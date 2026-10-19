@@ -463,11 +463,13 @@ tbody tr:last-child td { border-bottom:0; }
     return (
         "<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">"
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
-        f"<title>{html.escape(document.title, quote=True)} - Verified architecture verdict</title>"
+        f"<title>{html.escape(document.title, quote=True)} - Architecture verdict</title>"
         f"<style>{css}</style></head><body><main class=\"page\">"
         f'<header class="hero"><div class="eyebrow">Architecture Editorial Brief</div><h1>{html.escape(document.title, quote=True)}</h1>'
-        f'<div class="hero-meta"><span class="badge verified">Verified</span><span class="badge pattern">{html.escape(pattern_name)} <code>{html.escape(pattern_id)}</code></span>'
-        f'<time datetime="{generated_on.isoformat()}">{generated_on.isoformat()}</time></div></header>'
+        f'<div class="hero-meta"><span class="badge verified">Structure checked</span><span class="badge pattern">{html.escape(pattern_name)} <code>{html.escape(pattern_id)}</code></span>'
+        f'<time datetime="{generated_on.isoformat()}">{generated_on.isoformat()}</time></div>'
+        '<p>Automated checks cover report structure and selected consistency rules. '
+        'A pass does not establish that the recommendation is correct or safe to implement.</p></header>'
         f'<section class="metrics" aria-label="Verdict summary">{"".join(cards)}</section>'
         f'<div class="content">{"".join(sections)}</div></main></body></html>\n'
     )
@@ -488,7 +490,7 @@ class _OutputContractParser(HTMLParser):
 
 
 def _validate_html(output: str, document: VerdictDocument) -> None:
-    required = ("<!doctype html>", '<meta charset="utf-8">', "<main", "<style>", "@media print", "Verified")
+    required = ("<!doctype html>", '<meta charset="utf-8">', "<main", "<style>", "@media print", "Structure checked")
     missing = [token for token in required if token not in output]
     if missing:
         raise VerdictRenderError(f"rendered HTML is missing required output: {', '.join(missing)}")
